@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace VowelCountTask
 {
-    
+
     public class Class1
     {
         public static int CountOfVowels(string str)
@@ -69,27 +69,21 @@ namespace VowelCountTask
             string[] words = str.Split(new char[] { ' ' });
             for (int i = 0; i < words.Length; i++)
             {
-                if (str.IndexOf(words[i]) != str.LastIndexOf(words[i]))
+                if (words[i].LastIndexOfAny(c) == words[i].Length - 1)
                 {
-                    string temp = "";
-                    if (words[i].LastIndexOfAny(c) == words[i].Length - 1)
-                    {
 
-                        temp = words[i].Remove(words[i].Length - 1);
-                        str.Substring(str.LastIndexOf(temp), temp.Length);
-                    }
-                    else
-                    {
-                        temp = words[i];
-                        str.Substring(str.LastIndexOf(temp), temp.Length);
-                    }
-                    i = 0;
+                    words[i] = words[i].Remove(words[i].Length - 1);
                 }
-            }
+                while (str.IndexOf(words[i]) != str.LastIndexOf(words[i]))
+                {
+                    string temp = words[i];
+                    str = str.Substring(0, str.LastIndexOf(temp) - 1) + str.Substring(str.LastIndexOf(temp) + temp.Length);
 
+
+                }
+
+            }
             return str;
         }
-
     }
-
 }
